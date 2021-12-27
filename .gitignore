@@ -1,0 +1,7 @@
+/static_cache/*
+static_cache/*
+static_cache/out_vid/*
+static_cache/sent_vid/*
+__pycache__/*
+__pycache__/
+__pycache__
