@@ -7,10 +7,8 @@ import tensorflow as tf
 from matplotlib import pyplot as plt
 from matplotlib.collections import LineCollection
 import matplotlib.patches as patches
+plt.switch_backend('Agg') 
 
-# Some modules to display an animation using imageio.
-import imageio
-from IPython.display import HTML, display
 
 # Dictionary that maps from joint names to keypoint indices.
 KEYPOINT_DICT = {
@@ -328,7 +326,7 @@ def crop_and_resize(image, crop_region, crop_size):
       image, box_indices=[0], boxes=boxes, crop_size=crop_size)
     return output_image
 
-def run_inference(movenet, image, crop_region, crop_size):
+def run_inference(model, image, crop_region, crop_size):
     """Runs model inferece on the cropped region.
 
     The function runs the model inference on the cropped region and updates the
@@ -338,7 +336,7 @@ def run_inference(movenet, image, crop_region, crop_size):
     input_image = crop_and_resize(
     tf.expand_dims(image, axis=0), crop_region, crop_size=crop_size)
     # Run model inference.
-    keypoints_with_scores = movenet(input_image)
+    keypoints_with_scores = model.movenet(input_image)
     # Update the coordinates.
     for idx in range(17):
         keypoints_with_scores[0, 0, idx, 0] = (

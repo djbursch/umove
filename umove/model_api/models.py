@@ -1,3 +1,6 @@
 from django.db import models
 
-# Create your models here.
+class Video(models.Model):
+    video_name = models.CharField(max_length=250)
+    video = models.FileField(('Video'), upload_to='./static_cache/sent_vid/')
+
